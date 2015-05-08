@@ -1,0 +1,37 @@
+// Place all the styles related to the movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background: url('http://i.imgur.com/kqtQWWf.jpg');
+  background-size: cover;
+  height: 800px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center top;
+}
+
+.container {
+  background-color: white;
+  background-size: cover;
+  opacity: 0.9;
+  min-height: 800px;
+  max-width: 1000px;
+  }
+
+.font {
+  font-family: 'Arvo', serif;
+  }
+
+.syn {
+  font-family: 'Arvo', serif;
+  text-align: justify;
+  padding-top:10px;
+  padding-bottom:15px;
+}
+
+.title{
+  text-decoration: underline;
+}
+.indent{
+  text-indent: 25px;
+}

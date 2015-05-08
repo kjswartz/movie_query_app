@@ -1,0 +1,77 @@
+<% if @title.blank? %>
+  <div class="jumbotron">
+    <h1>Search For a Flick</h1>
+  </div>
+
+  <%= form_tag(root_path, method: "get", class:"form-inline", style:"padding-left:300px;") do %>
+    <div class="form-group">
+      <%= label_tag(:title, "Movie Title:") %>
+      <%= text_field_tag(:title, nil, class: "form-control", placeholder: "Enter Movie Title") %>
+    </div>
+    <button type="submit" class="btn btn-default">Search</button>
+  <% end %>
+
+<% else %>
+
+  <%= form_tag(movies_search_path, method: "get", class:"form-inline", style:"padding:10px;") do %>
+  <div class="form-group">
+    <%= label_tag(:title, "Movie Title:") %>
+    <%= text_field_tag(:title, nil, class: "form-control", placeholder: "Enter Movie Title") %>
+  </div>
+  <button type="submit" class="btn btn-default">Search</button>
+  <% end %>
+
+
+  <% if @movie.blank? %>
+    <div class="jumbotron">
+      <h1><%= @title %> could not be found</h1>
+    </div>
+  <% else %>
+    <div class="jumbotron">
+      <h1><%= @movie_title.upcase %> <small><i>(<%= link_to @movie_mpaa_rating, "http://www.mpaa.org/wp-content/uploads/2013/11/film_ratings1.jpg" %>)</i></small></h1>
+      <p class="font"><i><%= truncate(@movie_synopsis, length: 225, separator: ".") %></i></p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-1">
+        <%= image_tag @movie_poster_original, class: "img-responsive"%>
+      </div>
+
+      <div class="col-md-7">
+        <p><strong>Audience Score:</strong> <%= @movie_rating_a_score %> (<%= @movie_rating_audience %>)</p>
+        <p><strong>Critics Score:</strong> <%= @movie_rating_c_score %> (<%= @movie_rating_critics %>)</p>
+        <p><strong>Runtime:</strong> <%= @movie_runtime %> minutes</p>
+
+        <% unless @movie_release_theater.blank? %>
+          <p><strong>Theatical Release:</strong> <%= @movie_release_theater.strftime('%A %B %d, %Y') %></p>
+        <% else %>
+          <p><strong>Theatical Release:</strong> No Release Listed</p>
+        <% end %>
+
+        <% unless @movie_release_dvd.blank? %>
+          <p><strong>DVD Release:</strong> <%= @movie_release_dvd.strftime('%A %B %d, %Y') %></p>
+        <% else %>
+          <p><strong>DVD Release:</strong> No Release Listed</p>
+        <% end %>
+
+        <h4 class="title"><i>Cast</i></h4>
+        <% @movie['abridged_cast'].each do |actor| %>
+          <p><span class="glyphicon glyphicon-user"></span> <%= actor['name'] %></p>
+            <% if actor['characters'].blank? %>
+                <p style="text-indent:10px"><span class="glyphicon glyphicon-film"></span> Screen character not listed.</p>
+              <% else %>
+                <p style="text-indent:10px"><span class="glyphicon glyphicon-film"></span> <%= actor['characters'][0] %></p>
+            <% end %>
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 syn">
+        <strong class="title"><i>Synopsis:</i></strong> <%= @movie_synopsis %>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>

@@ -1,0 +1,9 @@
+== README
+
+* Ruby version: 2.2.0
+
+* How to run: Need to enter ?title= before you enter in the title of the movie to search.
+
+
+Please feel free to use a different markup language if you do not plan to run
+<tt>rake doc:app</tt>.
